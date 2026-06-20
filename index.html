@@ -133,7 +133,7 @@
         /* Project / Sample Display Boxes */
         .sample-display { background: #f8fafc; border: 1px dashed var(--secondary); padding: 1.5rem; border-radius: 8px; margin-top: 1rem; color: var(--dark); }
         .sample-display-title { font-weight: 700; color: #1e40af; font-size: 1.1rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
-        
+         
         .bullet-structure { margin-left: 1.5rem; margin-top: 0.5rem; }
         .bullet-structure li { margin-bottom: 0.4rem; }
 
@@ -141,7 +141,7 @@
         .contact-box { max-width: 550px; margin: 0 auto 2rem auto; text-align: center; }
         .contact-box p { margin: 1.2rem 0; font-size: 1.1rem; }
         .contact-box a { color: var(--secondary); text-decoration: none; font-weight: 600; }
-         
+          
         .interactive-form { display: flex; flex-direction: column; gap: 1rem; text-align: left; margin-top: 2rem; }
         .interactive-form input, .interactive-form textarea { width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; }
         .form-btn { background: var(--primary); color: var(--white); border: none; padding: 0.75rem; border-radius: 6px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
@@ -429,34 +429,46 @@
     <!-- POPUP MODAL ARCHITECTURE -->
     <div id="resume-modal" class="modal-bg">
         <div class="modal-box">
-            <h3 style="color:var(--primary); margin-bottom:1rem;">Document Viewer Simulation</h3>
-            <p>The system is calling file resource link:<br><strong style="color:var(--accent);">Abubakr_Shareef_Mohammed_Resume.pdf</strong></p>
-            <p style="font-size:0.85rem; color:var(--gray); margin-top:1rem;">(In live production, this window renders your active PDF embed link successfully.)</p>
-            <button onclick="closeResumeModal()" class="close-btn">Close Viewer</button>
+            <h3 style="color:var(--primary); margin-bottom:1rem;">Document Viewer Notice</h3>
+            <p style="color:var(--gray); margin-bottom:1rem;">In a live hosted deployment environment, this system trigger safely serves, executes, or downloads your professional physical asset: <strong>Abubakr_Shareef_Mohammed_Resume.pdf</strong>.</p>
+            <button class="close-btn" onclick="closeResumeModal()">Close Window</button>
         </div>
     </div>
 
     <!-- GLOBAL FOOTER -->
     <footer>
-        <p>&copy; 2026 Abubakr Shareef Mohammed. All Rights Reserved.</p>
+        <p>&copy; 2026 Abubakr Shareef Mohammed. All Rights Reserved | Computer Information Systems Portfolio.</p>
     </footer>
 
-    <!-- INTERACTIVE LOGIC SCRIPT -->
+    <!-- INTERACTIVE VIEW CONTROLLER SCRIPTS -->
     <script>
-        function navigateTo(targetPageId) {
-            const dynamicViews = document.querySelectorAll('.page-view');
-            dynamicViews.forEach(view => view.classList.remove('active'));
+        // Tab Router Mechanism
+        function navigateTo(viewId) {
+            // Hide all views
+            const views = document.querySelectorAll('.page-view');
+            views.forEach(view => view.classList.remove('active'));
+
+            // Deactivate all navigation buttons
+            const buttons = document.querySelectorAll('nav button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Show selected view
+            const targetView = document.getElementById(viewId);
+            if (targetView) {
+                targetView.classList.add('active');
+            }
+
+            // Highlight active button
+            const activeBtn = document.getElementById('nav-' + viewId);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
             
-            const structuralButtons = document.querySelectorAll('nav button');
-            structuralButtons.forEach(btn => btn.classList.remove('active'));
-            
-            document.getElementById(targetPageId).classList.add('active');
-            document.getElementById('nav-' + targetPageId).classList.add('active');
-            
-            window.scrollTo({top: 0, behavior: 'smooth'});
+            // Auto-scroll window to top cleanly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        /* Added Modal Trigger Control logic */
+        // Modal Component Controls
         function openResumeModal() {
             document.getElementById('resume-modal').style.display = 'flex';
         }
@@ -465,11 +477,19 @@
             document.getElementById('resume-modal').style.display = 'none';
         }
 
-        /* Added Form Simulation Handler */
-        function simulateSubmit(e) {
-            e.preventDefault();
-            alert("Success! Your message has been simulated and cleared safely for presentation purposes.");
-            e.target.reset();
+        // Form Submit Simulation Handler
+        function simulateSubmit(event) {
+            event.preventDefault();
+            alert('Thank you! Your message simulation has processed successfully.');
+            event.target.reset();
+        }
+
+        // Close modal instantly if user clicks on background overlay
+        window.onclick = function(event) {
+            const modal = document.getElementById('resume-modal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
         }
     </script>
 </body>
